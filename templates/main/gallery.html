@@ -1,0 +1,128 @@
+{%extends "main/base.html"%}
+{% load static %}
+
+    {%block content%}
+
+   
+
+    <!-- ****** Breadcumb Area Start ****** -->
+    <div class="breadcumb-area" >
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="bradcumb-title text-center">
+                        <h2>Gallery</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ****** Breadcumb Area End ****** -->
+
+    <!-- ****** Gallery Area Start ****** -->
+    <section class="Gallery-area section_padding_80" >
+        <div class="container" style="background-color: white;grid-column: 300px">
+            <br><br>
+            <div class="row" >
+
+                <!-- Single Post -->
+
+                
+
+                {%for post,like in posts%}
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-post wow fadeInUp" data-wow-delay="0.1s">
+                        <!-- Post Thumb -->
+                        <div class="post-thumb">
+                            {%if post.image_format%}
+                            <a href="{% url 'comment' post.pk%}"><img src= {{post.picurl}} alt=""></a>
+                            {%else%}
+                            <video width="330" height="250" controls>
+                            <source src="{{post.videourl}}" type="video/mp4"></source>
+                            </video>
+                            {%endif%}
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <div class="post-meta d-flex">
+                                <div class="post-author-date-area d-flex">
+                                    <!-- Post Author -->
+                                    <div class="post-author">
+                                        <a href="#"> By {{post.User.first_name}} {{post.User.last_name}}</a>
+                                    </div>
+                                    <!-- Post Date -->
+                                    
+                                </div>
+                                <!-- Post Comment & Share Area -->
+                                <div class="post-comment-share-area d-flex">
+                                    <!-- Post Favourite -->
+                                    <div class="post-favourite">
+                                        <a href="{% url 'communicate' post.pk 2%}">
+                                            {%if like%}
+                                                    <i class="fa fa-heart" aria-hidden="true">
+                                                        {%else%}
+                                                    <i class="fa fa-heart-o" aria-hidden="true">
+                                                        {%endif%}
+                                            </i> {{post.love_num}}</a>
+                                    </div>
+                                    <!-- Post Comments -->
+                                    <div class="post-comments">
+                                        <a href="{% url 'comment' post.pk%}"><i class="fa fa-comment-o" aria-hidden="true"></i> {{post.comment_num}}</a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+                
+<!-- Single Post -->
+                
+
+                <div class="col-12">
+                    <div class="pagination-area d-sm-flex mt-15">
+                        <nav aria-label="#">
+                            <ul class="pagination">
+                                {%if page.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page.previous_page_number }}"> <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+                                </li>
+                                {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="#"> <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+                                </li>
+                                {% endif %}
+                                
+                                <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+                                <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+                                <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+                                {% if page.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page.next_page_number }}">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                </li>
+                                {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+
+                    </div>
+                </div>
+
+                
+
+            </div>
+            <br>
+            <br>
+        </div>
+    </section>
+    <!-- ****** Gallery Area End ****** -->
+
+{%endblock%}
+    

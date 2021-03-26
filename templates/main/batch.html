@@ -1,0 +1,96 @@
+{%extends "main/base.html"%}
+{% load static %}
+
+    {%block content%}
+
+
+    
+
+    <!-- ****** Blog Area Start ****** -->
+    <div class="breadcumb-area" style="background-image: url(img/bg-img/breadcumb.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="bradcumb-title text-center">
+                        <h2>The Graduating Class of 2020</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="breadcumb-nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="blog_area section_padding_0_80">
+        <div class="container" style="background-color: white;">
+            <br><br>
+            <div class="row justify-content-center" >
+
+                {% for student in students%}
+                <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                    <div class="single-post mt-5 mt-lg-0">
+                        <!-- Single Widget Area -->
+                        <div class="single-widget-area about-me-widget text-center">
+                            <div class="widget-title">
+                                <h6>{{student.Branch}}</h6>
+                            </div>
+                            <div class="about-me-widget-thumb">
+                                <a href="{% url 'wall' student.pk%}">
+                                <img src="{{student.general.profilepicurl}}" alt="" >
+                                </a>
+                            </div>
+                            <a href="{% url 'wall' student.pk%}"><h4 class="font-shadow-into-light">{{student.User.first_name}} {{student.User.last_name}}</h4></a>
+                        </div>
+                    
+                    </div>
+                </div>
+            {%endfor%}
+                
+
+                <div class="col-12">
+                    <div class="pagination-area d-sm-flex mt-15">
+                        <nav aria-label="#">
+                            <ul class="pagination">
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="page-status">
+                            <p>Page 1 of 60 results</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br><br>
+        </div>
+
+                <!-- ****** Blog Sidebar ****** -->
+                
+            </div>
+        </div>
+    </section>
+    <!-- ****** Blog Area End ****** -->
+
+    {%endblock%}
+
+   

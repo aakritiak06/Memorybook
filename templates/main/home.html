@@ -1,0 +1,281 @@
+{%extends "main/base.html"%}
+{% load static %}
+
+    {%block content%}
+
+
+    <section class="welcome-post-sliders owl-carousel">
+
+        <!-- Single Slide -->
+        {%for post in posts2%}
+
+        <div class="welcome-single-slide">
+            <!-- Post Thumb -->
+            {%if post.image_format%}
+            <a href="{% url 'comment' post.pk%}"><img src= {{post.picurl}} alt=""></a>
+            {%else%}
+            <video  controls>
+            <source src="{{post.videourl}}" type="video/mp4"></source>
+        </video>
+            {%endif%}
+
+            <!-- <img src="{{post.picurl}}" alt=""> -->
+            <!-- Overlay Text -->
+            <div class="project_title">
+                <div class="post-date-commnents d-flex">
+                    <a href="#">{{post.date}}</a>
+                    <a href="#">{{post.love_num}} Likes</a>
+                </div>
+                <a href="#">
+                    <h5>“{{post.title}}”: {{post.thought}}</h5>
+                </a>
+            </div>
+        </div>
+
+          {%endfor%}
+
+
+
+        <!-- Single Slide -->
+        
+
+    </section>
+    <!-- ****** Welcome Area End ****** -->
+
+    <!-- ****** Categories Area Start ****** -->
+    <!-- <section class="categories_area clearfix welcome-post-sliders owl-carousel" id="about">
+        
+            
+        <div class="welcome-single-slide">
+            <div class="single_catagory wow fadeInUp" data-wow-delay=".3s">
+                <img src="{% static 'main/img/catagory-img/1.jpg' %}" alt="">
+                <div class="catagory-title">
+                    <a href="#">
+                        <h5>#Zeitgiest</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="welcome-single-slide">
+            <div class="single_catagory wow fadeInUp" data-wow-delay=".6s">
+                <img src="{% static 'main/img/catagory-img/2.jpg' %}" alt="">
+                <div class="catagory-title">
+                    <a href="#">
+                        <h5>#Other_Hashtags</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="welcome-single-slide">
+            <div class="single_catagory wow fadeInUp" data-wow-delay=".9s">
+                <img src="{% static 'main/img/catagory-img/3.jpg' %}" alt="">
+                <div class="catagory-title">
+                    <a href="#">
+                        <h5>Should be a slider</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+            
+
+        
+    </section> -->
+    <!-- ****** Categories Area End ******-->
+
+    <!-- ****** Blog Area Start ****** -->
+    <section class="blog_area section_padding_0_80" style="background-image: url({%static 'main/img/bg-01.jpeg'%});background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;">
+        <div class="container">
+            <div class="row justify-content-center" style="background-color: white; column-width: 300px;">
+
+                <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                    <div class="blog-sidebar mt-5 mt-lg-0">
+                        <!-- Single Widget Area -->
+
+                        <div class="single-widget-area about-me-widget text-center">
+                            
+                        </div>
+
+                        <div class="single-widget-area about-me-widget text-center">
+                            <div class="widget-title">
+                                <h6>About Me</h6>
+                            </div>
+                            <div class="about-me-widget-thumb">
+                                <img src="{{gen.profilepicurl}}" alt="">
+                            </div>
+                            <h4 class="font-shadow-into-light">{{user.first_name}} {{user.last_name}}</h4>
+                            <!-- <p>We'll link this to the user's profile. The user can also add a brief summary/write up to their own wall.</p> -->
+                        </div>
+
+                        <!-- Single Widget Area -->
+                        
+
+                        <!-- Single Widget Area -->
+                        <div class="single-widget-area popular-post-widget">
+                            <div class="widget-title text-center">
+                                <h6>Popular Posts</h6>
+                            </div>
+                            <!-- Single Popular Post -->
+                            {%for post in like_sorted%}
+                            <div class="single-populer-post d-flex">
+                                {%if post.image_format%}
+                                <img width="155" height="104" src="{{post.picurl}}" alt="">
+                                {%else%}
+                                <video width="155" height="104" controls>
+                                <source src="{{post.videourl}}" type="video/mp4"></source>
+                                </video>
+                                {%endif%}
+                                <div class="post-content">
+                                    <a href="{%url 'comment' post.pk%}">
+                                        <h6>{{post.title}}</h6>
+                                    </a>
+                                    <p>{{post.date}}</p>
+                                </div>
+                            </div>
+                            <!-- Single Popular Post -->
+                            
+                            {%endfor%}
+                        </div>
+
+                        <!-- Single Widget Area -->
+                        
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-12 col-lg-8">
+                    <div class="row">
+
+                        <!-- Single Post -->
+
+                        <div class="col-12">
+                            <div class="single-post wow fadeInUp" data-wow-delay=".2s">
+                                <!-- Post Thumb -->
+                                
+                            </div>
+                        </div>
+
+
+
+                        {%for post,i in posts%}
+                        <div class="col-12">
+                            <div class="single-post wow fadeInUp" data-wow-delay=".2s">
+                                <!-- Post Thumb -->
+                                <div class="post-thumb ">
+                                     {%if post.image_format%}
+                                    <a href="{% url 'comment' post.pk%}"><img src= {{post.picurl}} alt=""></a>
+                                    {%else%}
+                                    <video width="100%" height="100%" controls>
+                                    <source src="{{post.videourl}}" type="video/mp4"></source>
+                                </video>
+                                    {%endif%}
+                                </div>
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                    <div class="post-meta d-flex">
+                                        <div class="post-author-date-area d-flex">
+                                            <!-- Post Author -->
+                                            <div class="post-author">
+                                                <a href="#">{{post.User.first_name}} {{post.User.last_name}}</a>
+                                            </div>
+                                            <!-- Post Date -->
+                                            <div class="post-date">
+                                                <a href="#">{{post.date}}</a>
+                                            </div>
+                                        </div>
+                                        <!-- Post Comment & Share Area -->
+                                        <div class="post-comment-share-area d-flex">
+                                            <!-- Post Favourite -->
+                                            <div class="post-favourite">
+                                                <a href="{% url 'communicate' post.pk 1%}">
+                                                    {%if i%}
+                                                    <i class="fa fa-heart fa-2x" aria-hidden="true">
+                                                        {%else%}
+                                                    <i class="fa fa-heart-o fa-2x" aria-hidden="true">
+                                                        {%endif%}
+                                                    </i> {{post.love_num}}
+                                                </a>
+                                            </div>
+                                            <!-- Post Comments -->
+                                            <div class="post-comments">
+                                                <a href="{% url 'comment' post.pk%}"><i class="fa fa-comment-o fa-2x" aria-hidden="true"></i> {{post.comment_num}}</a>
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        <!-- Single Post -->
+
+                <div class="col-12">
+                    <div class="pagination-area d-sm-flex mt-15">
+                        <nav aria-label="#">
+                            <ul class="pagination">
+                                {%if page.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page.previous_page_number }}"> <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+                                </li>
+                                {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="#"> <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+                                </li>
+                                {% endif %}
+                                
+                                <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+                                <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+                                <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+                                {% if page.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page.next_page_number }}">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                </li>
+                                {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                        
+                    </div>
+                </div>
+
+                 
+
+
+
+
+
+                        
+
+                        
+
+                        
+
+                        
+                        
+
+                    </div>
+
+                    <br>
+                    <br>
+                </div>
+
+                <!-- ****** Blog Sidebar ****** -->
+                
+            </div>
+        </div>
+    </section>
+    <!-- ****** Blog Area End ****** -->
+
+    {%endblock%}
+
+   

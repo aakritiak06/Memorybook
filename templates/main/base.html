@@ -1,0 +1,286 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Memorybook</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{%static 'main/img/core-img/favicon.ico'%}">
+
+    <!-- Core Stylesheet -->
+    <link href="{%static 'main/css/style.css'%}" rel="stylesheet">
+
+    <!-- Responsive CSS -->
+    <link href="{%static 'main/css/responsive/responsive.css' %}" rel="stylesheet">
+    <style>
+        .image-upload>input {
+            padding-right: 10px;
+            display: none;
+        }
+        article, aside, figure, footer, header, hgroup, 
+        menu, nav, section { display: block; }
+        
+    </style>
+   
+</head>
+
+<body style="background-image: url({%static 'main/img/bg-01.jpg'%});background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;">
+
+ 
+    <!-- Preloader Start -->
+    <div id="preloader">
+        <div class="yummy-load"></div>
+    </div>
+
+    <!-- Background Pattern Swither -->
+    <!-- <div id="pattern-switcher">
+        Bg Pattern
+    </div>
+    <div id="patter-close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </div> -->
+
+    <!-- ****** Top Header Area Start ****** -->
+    <div class="top_header_area" style="background-image: url({%static 'main/img/bg-01.jpg'%});background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;">
+        <div class="container">
+            <div class="row">
+                <div class="col-5 col-sm-6">
+                    <!--  Top Social bar start -->
+                    <div class="top_social_bar ">
+                        A journey down the memory lane...
+                       <!--  Or mayb Memories of the Class of 2020...something like that -->
+                    </div>
+                </div>
+                <!--  Login Register Area -->
+                <div class="col-7 col-sm-6">
+                    <div class="signup-search-area d-flex align-items-center justify-content-end">
+                        
+                        <!-- Search Button Area -->
+                        Hi, {{user.first_name}} &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; <a href="{%url 'profile'%}">Your Profile</a> &nbsp; &nbsp;  &nbsp; &nbsp;&nbsp; &nbsp; 
+                        <a class = "button" href="{% url 'logout-gen'%}"> Log Out</a>
+                        <!-- <button>Logout</button> -->
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ****** Top Header Area End ****** -->
+
+    <!-- ****** Header Area Start ****** -->
+    <header class="header_area" style="background-image: url({%static 'main/img/bg-01.jpg'%});background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;">
+        <div class="container">
+            <div class="row">
+                <!-- Logo Area Start -->
+                <div class="col-12">
+                    <div class="logo_area text-center">
+                        <a href="{%url 'home' %}" class="yummy-logo">Memorybook</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-lg">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#yummyfood-nav" aria-controls="yummyfood-nav" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars" aria-hidden="true"></i> Menu</button>
+                        <!-- Menu Area Start -->
+                        <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
+                            <ul class="navbar-nav" id="yummy-nav">
+                                {% if active == 1 %}
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{%url 'home' %}"><i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                {%else%}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{%url 'home' %}"><i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                {%endif%}
+                                
+                                {% if active == 2 %}
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{%url 'gallery' %}"><i class="fa fa-picture-o" aria-hidden="true"></i> Gallery</a>
+                                </li>
+                                {%else%}
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{%url 'gallery' %}"><i class="fa fa-picture-o" aria-hidden="true"></i> Gallery</a>
+                                </li>
+                                {%endif%}
+
+                                {% if active == 3 %}
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{%url 'batch'%}"><i class="fa fa-users" aria-hidden="true"></i> Graduating Batch</a>
+                                </li>
+                                {%else%}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{%url 'batch'%}"><i class="fa fa-users" aria-hidden="true"></i> Graduating Batch</a>
+                                </li>
+                                {%endif%}
+
+                                {% if active == 4 %}
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{% url 'post' %}"><i class="fa fa-camera-retro" aria-hidden="true"></i> Create a New Post</a>
+                                </li>
+                                {%else%}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'post' %}"><i class="fa fa-camera-retro" aria-hidden="true"></i> Create a New Post</a>
+                                </li>
+                                {%endif%}
+
+                                {% if active == 5 %}
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{% url 'about' %}"><i class="fa fa-info" aria-hidden="true"></i> About us</a>
+                                </li>
+                                {%else%}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'about' %}"><i class="fa fa-info" aria-hidden="true"></i> About us</a>
+                                </li>
+                                {%endif%}
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ****** Header Area End ****** -->
+
+
+        {%block content%}{%endblock%}
+
+    <!-- ****** Instagram Area Start ****** -->
+    <div class="instargram_area owl-carousel section_padding_100_0 clearfix" style="background-color: white" id="portfolio">
+
+        <!-- Instagram Item -->
+        
+
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="{%static 'main/img/bg-image.jpg'%}" alt="">
+            <!-- Hover -->   
+        </div>
+
+        
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="{%static 'main/img/space2.jpg'%}" alt="">
+            <!-- Hover -->
+        </div>
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="{%static 'main/img/bg-01.jpg'%}" alt="">
+            <!-- Hover -->
+        </div>
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="{%static 'main/img/space.jpg'%}" alt="">
+            <!-- Hover -->   
+        </div>
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="{%static 'main/img/sky.jpg'%}" alt="">
+            <!-- Hover -->   
+        </div>
+       
+
+        
+
+    </div>
+    <!-- ****** Our Creative Portfolio Area End ****** -->
+
+    <!-- ****** Footer Social Icon Area Start ****** -->
+    <div class="social_icon_area clearfix" style="background-color : white">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-social-area d-flex">
+                        <div class="single-icon">
+                            <a href="{%url 'home'%}"><i class="fa fa-home" aria-hidden="true"></i><span>Home</span></a>
+                        </div>
+                        <div class="single-icon">
+                            <a href="{%url 'gallery'%}"><i class="fa fa-picture-o" aria-hidden="true"></i><span>Gallery</span></a>
+                        </div>
+                        <div class="single-icon">
+                            <a href="{%url 'batch'%}"><i class="fa fa-users" aria-hidden="true"></i><span>Graduating batch</span></a>
+                        </div>
+                        <div class="single-icon">
+                            <a href="{%url 'post'%}"><i class="fa fa-camera-retro" aria-hidden="true"></i><span>New post</span></a>
+                        </div>
+                        <div class="single-icon">
+                            <a href="{% url 'about' %}"><i class="fa fa-info" aria-hidden="true"></i><span>About Us</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ****** Footer Social Icon Area End ****** -->
+
+    <!-- ****** Footer Menu Area Start ****** -->
+    <footer class="footer_area" style="background-color:white;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-content">
+                        <!-- Logo Area Start -->
+                        <div class="footer-logo-area text-center">
+                            <a href="{%url 'home' %}" class="yummy-logo">Memorybook</a>
+                        </div>
+                        <!-- Menu Area Start -->
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Copywrite Text -->
+                    <div class="copy_right_text text-center">
+                        <p>Back to top</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ****** Footer Menu Area End ****** -->
+
+    <!-- Jquery-2.2.4 js -->
+
+
+</body>
+<script src="{%static 'main/js/jquery/jquery-2.2.4.min.js'%}"></script>
+<!-- Popper js -->
+<script src="{%static 'main/js/bootstrap/popper.min.js'%}"></script>
+<!-- Bootstrap-4 js -->
+<script src="{%static 'main/js/bootstrap/bootstrap.min.js'%}"></script>
+<!-- All Plugins JS -->
+<script src="{%static 'main/js/others/plugins.js'%}"></script>
+<!-- Active JS -->
+<script src="{%static 'main/js/active.js'%}"></script>
+
+
+
+{%block javascript %}
+{% endblock %}
+
+
+

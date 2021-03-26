@@ -1,0 +1,217 @@
+{% extends 'main/base.html'%}
+{% load static %}
+
+{%block content%}
+    <!-- ****** Breadcumb Area Start ****** -->
+    
+    
+    <!-- ****** Breadcumb Area End ****** -->
+
+    <!-- ****** Single Blog Area Start ****** -->
+    <section class="single_blog_area section_padding_80">
+        <div class="container" style="background-color: white;grid-column: 300px">
+            <br><br>
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="row no-gutters">
+
+                        <!-- Single Post Share Info -->
+                        
+
+                        <!-- Single Post -->
+                        <div class="col-10 col-sm-11">
+                            <div class="single-post">
+                                <!-- Post Thumb -->
+                                <div class="post-thumb">
+                                    {%if post.image_format%}
+                                    <img src= {{post.picurl}} alt="">
+                                    {%else%}
+                                    <video width="530" height="440" controls>
+                                    <source src="{{post.videourl}}" type="video/mp4"></source>
+                                </video>
+                                    {%endif%}
+                                </div>
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                    <div class="post-meta d-flex">
+                                        <div class="post-author-date-area d-flex">
+                                            <!-- Post Author -->
+                                            <div class="post-author">
+                                                <a href="#">{{post.User.first_name}} {{post.User.last_name}}</a>
+                                            </div>
+                                            <!-- Post Date -->
+                                            <div class="post-date">
+                                                <a href="#">{{post.date}}</a>
+                                            </div>
+                                        </div>
+                                        <!-- Post post & Share Area -->
+                                        <div class="post-post-share-area d-flex">
+                                            <!-- Post Favourite -->
+                                            <div class="post-favourite">
+                                                <a href="{% url 'communicate' post.pk 1%}">
+                                                    {%if like%}
+                                                    <i class="fa fa-heart fa-2x" aria-hidden="true">
+                                                        {%else%}
+                                                    <i class="fa fa-heart-o fa-2x" aria-hidden="true">
+                                                        {%endif%}
+                                                    </i> {{post.love_num}}</a>
+                                            </div>
+                                            <!-- Post posts -->
+                                            <div class="post-posts">
+                                                <a href="#"><i class="fa fa-post-o fa-2x" aria-hidden="true"></i> {{post.post_num}}</a>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="post-content">
+                                    <div class="post-meta d-flex">
+                                        <div class="post-author-date-area d-flex">
+                                            <!-- Post Author -->
+                                            {{post.title}}
+
+                                            
+                                        </div>
+                                        <!-- Post post & Share Area -->
+                                    </div>
+
+                                </div>
+
+                                <div class="post-content">
+                                    <div class="post-meta d-flex">
+                                        <div class="post-author-date-area d-flex">
+                                            <!-- Post Author -->
+                                            {{post.thought}}
+                                            
+                                            
+                                        </div>
+                                        <!-- Post post & Share Area -->
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Tags Area -->
+                            <div class="tags-area">
+                                <a href="#">#Multipurpose</a>
+                                <a href="#">#Design</a>
+                                <a href="#">#Ideas</a>
+                            </div>
+
+                            {%if owner%}
+                            <div class="tags-area">
+                                <a onclick="return confirm('Are you sure you want to delete this?')" href="{%url 'delete' post.pk%}">Delete Post</a>
+                            </div>
+                            {%endif%}
+                            <!-- Related Post Area -->
+                            
+
+                            <div class="comment_area section_padding_50 clearfix">
+                                {% if not comments%}
+                                <h4 class="mb-30">0 Comments</h4>
+                                {% else %}
+                                
+                                <ol>
+                                    {% for cc in comments %}
+                                    <!-- Single Comment Area -->
+                                    <li class="single_comment_area">
+                                        <div class="comment-wrapper d-flex">
+                                            <!-- Comment Meta -->
+                                            <div class="comment-author">
+                                                <img src="{{cc.usr_det.profilepicurl}}" alt="">
+                                            </div>
+                                            <!-- Comment Content -->
+                                            <div class="comment-content">
+                                                <span class="comment-date text-muted">{{cc.date}}</span>
+                                                <h5>{{cc.User.first_name}} {{cc.User.last_name}}</h5>
+                                                <p>{{cc.comment}}</p>
+                                            </div>
+                                           
+                                           {% if user == cc.User or owner %}
+                                            <div class="tags-area">
+                                                <a onclick="return confirm('Are you sure you want to delete this?')" href="{%url 'delete-comment' cc.pk%}">Delete Comment</a>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ol>
+                                {% endif %}
+                            </div>
+
+                            <!-- Leave A post -->
+                            <div class="leave-post-area section_padding_50 clearfix">
+                                <div class="post-form">
+                                    <h4 class="mb-30">Leave A Comment</h4>
+
+                                    <!-- post Form -->
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="comment" id="message" cols="30" rows="2" placeholder="Comment"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn contact-btn">Comment</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ****** Blog Sidebar ****** -->
+                <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                    <div class="blog-sidebar mt-5 mt-lg-0">
+                        <!-- Single Widget Area -->
+                        <div class="single-widget-area about-me-widget text-center">
+                            <div class="widget-title">
+                                <h6>About Me</h6>
+                            </div>
+                            <div class="about-me-widget-thumb">
+                                <img src="{{gen.profilepicurl}}" alt="">
+                            </div>
+                            <h4 class="font-shadow-into-light">{{gen.User.first_name}} {{gen.User.last_name}}</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
+                        </div>
+
+                        <!-- Single Widget Area -->
+                        
+
+                        <!-- Single Widget Area -->
+                        <div class="single-widget-area popular-post-widget">
+                            <div class="widget-title text-center">
+                                <h6>Popular Post</h6>
+                            </div>
+                            {%for post in like_sorted%}
+                            <div class="single-populer-post d-flex">
+                                {%if post.image_format%}
+                                <img width="155" height="104" src="{{post.picurl}}" alt="">
+                                {%else%}
+                                <video width="155" height="103" controls>
+                                <source src="{{post.videourl}}" type="video/mp4"></source>
+                                </video>
+                                {%endif%}
+                                <div class="post-content">
+                                    <a href="{%url 'comment' post.pk%}">
+                                        <h6>{{post.title}}</h6>
+                                    </a>
+                                    <p>{{post.date}}</p>
+                                </div>
+                            </div>
+                            <!-- Single Popular Post -->
+                            
+                            {%endfor%}
+                            
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ****** Single Blog Area End ****** -->
+
+   {% endblock %}

@@ -1,0 +1,186 @@
+{%extends "main/base.html"%}
+{% load static %}
+
+{%block content%}
+
+
+<div class="breadcumb-area" >
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="bradcumb-title text-center">
+                        <h2>Welcome, {{user.first_name}} {{user.last_name}}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="breadcumb-nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%if message%}
+<script>
+    alert('{{ message }}');
+    </script>
+{%endif%}    
+<div class = "container" style="background-color: white;">
+    <br>
+    {%if data%}
+    Hello! {{user.first_name}}, congratulations on graduating, we hope that this online yearbook will help you re-live your memorable days at campus. Please fill the details below so that we can add these to your wall.
+    {%else%}
+    Hello! {{user.first_name}}, this online yearbook is dedicated for the graduating batch. So, please upload any memorable pic you find of the college/ your seniors and help them have a memorable farewell. Also make sure to maintain decency on the platform.
+    {%endif%}
+    <br><br>
+    <form method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" >
+        {% csrf_token %}
+        <div class="form-group">
+            Username
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="text" name="username" class="form-control" placeholder="Username" value="{{user.username}}" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            Current Password
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="password" name="curr_password" class="form-control" placeholder="Current password" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            New password
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="password" name="new_password" class="form-control" placeholder="New password"  />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            Re-enter new password
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="password" name="new_password2" class="form-control" placeholder="Re-enter new password"  />
+                </div>
+            </div>
+        </div>
+
+        {%if data%}
+
+
+
+        <div class="form-group">
+            Address (Optional)
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="text" name="address" class="form-control" placeholder="Address" value="{{data.Address}}" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            Branch*
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="text" name="branch" class="form-control" placeholder="Branch" value="{{data.Branch}}" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            Mobile number (Optional)
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="text" name="mobile" class="form-control" placeholder="Mobile number" value="{{data.Mobile}}" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            Website (Optional)
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="text" name="website" class="form-control" placeholder="Website" value="{{data.Website}}" />
+                </div>
+            </div>
+        </div>
+            About (Optional)
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <textarea type="text" name="summary" rows="5" class="form-control" placeholder="Tell us a bit about yourself ! This will appear on your wall ! (Optional)" value = "{{data.summary}}">{{data.Summary}}</textarea>
+                </div>
+            </div>
+        </div>
+
+        {%endif%}
+
+        Update Profile-pic
+
+        <div class="image-upload">
+            <label for="image">
+                <i class="fa fa-user-circle fa-3x" style = "cursor : pointer"  ></i>          
+            </label>
+          
+            <input type='file' id="image" onchange="readURL(this);" accept="image/*" name = "images"/>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Save Changes</button>
+            </div>
+            <br>
+
+            <img id="img" src="#" alt="" />
+            <br><br>
+            Note: To make changes please enter your current password as well.
+
+        </div>
+        <br>
+  </form>
+  <center>
+  {%if your_posts%}
+  <h3>Your Posts</h3>
+  <br>
+  {%for post in your_posts%}
+
+  <h5><a href="{% url 'comment' post.pk%}">{{post.title}}</a></h5>
+  <br>
+  {%endfor%}
+
+  {%endif%}
+  </center>
+</div>
+
+</br></br></br>
+{% endblock %}
+
+{%block javascript %}
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    $('#img').attr('src', e.target.result);
+                    
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+{% endblock %}
